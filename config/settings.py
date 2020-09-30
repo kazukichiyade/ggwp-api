@@ -55,6 +55,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# CORS設定
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
 
 ROOT_URLCONF = "config.urls"
@@ -77,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
+# 認証方法をデフォルトからjwtに変更
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
@@ -87,6 +88,7 @@ REST_FRAMEWORK = {
     ],
 }
 
+# JWT設定
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("JWT",),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
@@ -132,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tokyo"
 
 USE_I18N = True
 
@@ -140,8 +142,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = "api.User"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
