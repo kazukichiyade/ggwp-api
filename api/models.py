@@ -27,3 +27,20 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
+    # 管理者ユーザー作成関数
+    def create_superuser(self, email, password):
+
+        # ユーザー作成関数を使用
+        user = self.create_user(email, password)
+
+        # adminダッシュボードにログインする権限付与
+        user.is_staff = True
+
+        # 管理者権限付与(DB変更等の全権限)
+        user.is_superuser = True
+
+        # DB保存
+        user.save(using=self._db)
+
+        return user
