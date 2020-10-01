@@ -19,6 +19,6 @@ def main():
 
 
 if __name__ == "__main__":
+    main()
     # MySQL接続設定
     pymysql.install_as_MySQLdb()
-    main()
