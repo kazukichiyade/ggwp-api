@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
-    PermissionMixin,
+    PermissionsMixin,
 )
 from django.conf import settings
 
@@ -47,7 +47,7 @@ class UserManager(BaseUserManager):
 
 
 # Userモデルを定義(usernameからemailにモデルの定義変更をするため、AbstractBaseUserをオーバーライド)
-class User(AbstractBaseUser, PermissionMixin):
+class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
