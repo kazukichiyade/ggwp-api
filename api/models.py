@@ -44,3 +44,20 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
+
+# Userモデルを定義(usernameからemailにモデルの定義変更をするため、AbstractBaseUserをオーバーライド)
+class User(AbstractBaseUser, PermissionMixin):
+
+    email = models.EmailField(max_length=50, unique=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    # インスタンス作成し、いつでもUserManagerクラスのメソッドを使用できるように設定
+    objects = UserManager()
+
+    # 初期状態では"username"になっている
+    USERNAME_FIELD = "email"
+
+    def __str__(self):
+        return self.email
