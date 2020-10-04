@@ -12,16 +12,21 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from datetime import timedelta
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 外部パッケージのenvironを使用し、.envファイルから環境変数取得
+env = environ.Env(DEBUG=(bool, False))
+env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "dllm-o0qq_@azds3cbxbsb3amn^*t93hpf1ikp@z8mrn57fbp3"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -101,11 +106,11 @@ SIMPLE_JWT = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "ggwp",
-        "USER": "root",
-        "PASSWORD": "Kazukichino1@",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASS"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
         "OPTIONS": {
             "charset": "utf8mb4",
         },

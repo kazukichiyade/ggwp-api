@@ -16,6 +16,7 @@ djoser = "*"
 django-cors-headers = "*"
 mysqldb = "*"
 mysqlclient = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.8"
